@@ -1,0 +1,13 @@
+FROM ghcr.io/flant/shell-operator:v1.4.15
+
+RUN apk --no-cache add gnutls
+
+RUN adduser -S controller
+
+RUN chown -R controller "/hooks" &&  \
+    mkdir /var/run/shell-operator &&  \
+    chown -R controller "/var/run/shell-operator"
+
+USER controller
+
+COPY hooks /hooks

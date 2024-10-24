@@ -1,0 +1,10 @@
+{
+  "configVersion": "v1",
+  "schedule": [
+    {
+      "name": "generate CRL",
+      "crontab": "*/1 * * * *",
+      "allowFailure": true
+    }
+  ]
+}

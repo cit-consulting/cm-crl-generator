@@ -1,0 +1,20 @@
+apiVersion: skaffold/v4beta9
+kind: Config
+build:
+  artifacts:
+    - image: ghcr.io/cit-consulting/cm-crl-generator
+      context: docker
+  local:
+    push: false
+    useDockerCLI: true
+    useBuildkit: false
+manifests:
+  rawYaml:
+    - https://github.com/cert-manager/cert-manager/releases/download/v1.16.1/cert-manager.yaml
+  kustomize:
+    paths:
+      - k8s/install
+      - k8s/example
+deploy:
+  tolerateFailuresUntilDeadline: true
+  kubectl:  {}
