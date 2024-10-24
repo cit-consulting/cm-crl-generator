@@ -2,6 +2,8 @@ FROM ghcr.io/flant/shell-operator:v1.4.15
 
 RUN apk --no-cache add gnutls
 
+ADD --chmod=0755 https://github.com/cert-manager/cmctl/releases/download/v2.1.1/cmctl_linux_amd64 /bin/cmctl
+
 RUN adduser -S controller
 
 RUN chown -R controller "/hooks" &&  \
