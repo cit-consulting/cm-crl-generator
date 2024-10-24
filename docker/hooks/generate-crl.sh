@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if [[ $1 == "--config" ]] ; then
-  cat lib/generate-crl.config.json
+  cat lib/generate-crl.config.yaml
 else
   # reconcile CA
   # cm-crl-generator.citc.dev/revoke = true

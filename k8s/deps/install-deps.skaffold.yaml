@@ -6,8 +6,4 @@ manifests:
   rawYaml:
     - cert-manager.yaml
 deploy:
-  kubectl:
-    hooks:
-      after:
-        - host:
-            command: ["sh", "-c", "echo waiting webhook stabilization ; sleep 10"]
+  kubectl: { }

@@ -1,0 +1,12 @@
+configVersion: v1
+kubernetes:
+  - name: "issuer"
+    apiVersion: cert-manager.io/v1
+    kind: Issuer
+    executeHookOnEvent: [ "Added", "Modified" ]
+    group: "ca-certs"
+  - name: "certs"
+    apiVersion: cert-manager.io/v1
+    kind: Certificate
+    executeHookOnEvent: [ "Modified" ]
+    group: "ca-certs"
