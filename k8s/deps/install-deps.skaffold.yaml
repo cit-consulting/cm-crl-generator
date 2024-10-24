@@ -1,0 +1,13 @@
+apiVersion: skaffold/v4beta9
+kind: Config
+metadata:
+  name: dependencies
+manifests:
+  rawYaml:
+    - cert-manager.yaml
+deploy:
+  kubectl:
+    hooks:
+      after:
+        - host:
+            command: ["sh", "-c", "echo waiting webhook stabilization ; sleep 10"]
