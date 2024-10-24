@@ -1,0 +1,25 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: cert-3
+  namespace: ns-2
+spec:
+  secretName: cert-3-sec
+  privateKey:
+    algorithm: RSA
+    encoding: PKCS1
+    size: 2048
+  duration: 6h
+  renewBefore: 1h
+  usages:
+    - client auth
+  subject:
+    organizations:
+      - citc
+
+  commonName: user3
+
+  issuerRef:
+    name: ca-issuer-2
+    kind: ClusterIssuer
+    group: cert-manager.io

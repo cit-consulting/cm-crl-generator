@@ -1,0 +1,36 @@
+configVersion: v1
+kubernetes:
+  - name: "clusterissuer"
+    apiVersion: cert-manager.io/v1
+    kind: ClusterIssuer
+    executeHookOnEvent: [ "Added", "Modified" ]
+    group: "ca-certs"
+  - name: "issuer"
+    apiVersion: cert-manager.io/v1
+    kind: Issuer
+    executeHookOnEvent: [ "Added", "Modified" ]
+    group: "ca-certs"
+  - name: "certs"
+    apiVersion: cert-manager.io/v1
+    kind: Certificate
+    executeHookOnEvent: [ "Modified" ]
+    jqFilter: ".metadata.annotations"
+    group: "ca-certs"
+  - name: "secrets"
+    apiVersion: ""
+    kind: Secret
+    labelSelector:
+      matchLabels:
+        "cm-crl-generator.citc.dev/track": "true"
+    group: "ca-certs"
+  - name: "certs-renew"
+    apiVersion: ""
+    kind: Secret
+    executeHookOnEvent: [ "Added", "Modified" ]
+    jqFilter: ".metadata.annotations"
+    labelSelector:
+      matchLabels:
+        "cm-crl-generator.citc.dev/track": "true"
+settings:
+  executionMinInterval: 3s
+  executionBurst: 1

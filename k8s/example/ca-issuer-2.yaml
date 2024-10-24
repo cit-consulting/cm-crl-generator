@@ -1,0 +1,26 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: selfsigned-ca-cert
+  namespace: cert-manager
+spec:
+  isCA: true
+  commonName: selfsigned-ca
+  secretName: ca-issuer-2-sec
+  privateKey:
+    algorithm: ECDSA
+    size: 256
+  issuerRef:
+    name: selfsigned-issuer
+    kind: ClusterIssuer
+    group: cert-manager.io
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: ca-issuer-2
+  annotations:
+    cm-crl-generator.citc.dev/crl-enabled: true
+spec:
+  ca:
+    secretName: ca-issuer-2-sec

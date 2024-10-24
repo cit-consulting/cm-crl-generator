@@ -1,0 +1,17 @@
+apiVersion: skaffold/v4beta9
+kind: Config
+metadata:
+  name: dependencies
+deploy:
+  helm:
+    releases:
+      - name: cert-manager
+        namespace: cert-manager
+        createNamespace: true
+        repo: https://charts.jetstack.io
+        version: 1.16.1
+        remoteChart: cert-manager
+        setValues:
+          crds.enabled: true
+          enableCertificateOwnerRef: true
+          prometheus.enabled: false
